@@ -220,7 +220,7 @@ public class MainApp {
 
                 
             case 0:
-                System.out.println("Exiting... Goodbye!, hi there");
+                System.out.println("Exiting... Goodbye!!");
                 break;
 
             default:
