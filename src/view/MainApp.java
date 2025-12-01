@@ -164,8 +164,9 @@ public class MainApp {
             case 9:
                 System.out.println("Total Employees: " + EmployeeDAO.getEmpCount());
                 break;
+                
             case 10:
-            	int sortChoice;
+                int sortChoice;
                 do {
                     System.out.println("\n==== Sorting Menu ====");
                     System.out.println("1. Sort by ID");
@@ -175,34 +176,51 @@ public class MainApp {
                     System.out.print("Enter your choice: ");
                     sortChoice = sc.nextInt();
 
-                    if (sortChoice >= 1 && sortChoice <= 3) {
-                        System.out.println("Choose Order:");
-                        System.out.println("1. ASC");
-                        System.out.println("2. DSC");
-                        System.out.print("Enter order: ");
-                        int orderChoice = sc.nextInt();
-
-                        OrderEnum order = (orderChoice == 1) ? OrderEnum.ASC : OrderEnum.DSC;
-
-                        String attribute = "";
-
-                        switch (sortChoice) {
-                            case 1: attribute = "id"; break;
-                            case 2: attribute = "name"; break;
-                            case 3: attribute = "salary"; break;
-                        }
-
-                        dao.sortEmployee(attribute, order);
-                        System.out.println("\nEmployees sorted successfully!");
-                        dao.displayAllEmployee();  // show result
+                    if (sortChoice == 4) {
+                        System.out.println("Returning to main menu...");
+                        break;
                     }
 
-                } while (sortChoice != 4);
-                
+                    if (sortChoice < 1 || sortChoice > 4) {
+                        System.out.println("Invalid choice! Try again.");
+                        continue;
+                    }
+
+                    System.out.println("Choose Order:");
+                    System.out.println("1. ASC");
+                    System.out.println("2. DSC");
+                    System.out.print("Enter order: ");
+                    int orderChoice = sc.nextInt();
+
+                    OrderEnum order;
+                    if (orderChoice == 1)
+                        order = OrderEnum.ASC;
+                    else if (orderChoice == 2)
+                        order = OrderEnum.DSC;
+                    else {
+                        System.out.println("Invalid order! Defaulting to ASC.");
+                        order = OrderEnum.ASC;
+                    }
+
+                    String attribute = "";
+                    switch (sortChoice) {
+                        case 1: attribute = "id"; break;
+                        case 2: attribute = "name"; break;
+                        case 3: attribute = "salary"; break;
+                    }
+
+                    dao.sortEmployee(attribute, order);
+
+                    System.out.println("\nEmployees sorted successfully!");
+                    dao.displayAllEmployee();
+
+                } while (true);
+
                 break;
+
                 
             case 0:
-                System.out.println("Exiting... Goodbye!");
+                System.out.println("Exiting... Goodbye!, hi there");
                 break;
 
             default:
